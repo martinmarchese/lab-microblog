@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+    <title>New Post</title>
+</head>
+
+<body>
+
+<header th:replace="layout :: site-header" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1>New Post</h1>
+
+            <form method="post" th:object="${postForm}">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input class="form-control" id="title" type="text" name="title" th:value="*{title}" />
+                    <span class="formError" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Invalid title</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="body">Body:</label>
+                    <input class="form-control" id="body" type="textarea" name="body" th:value="*{body}" />
+                    <span class="formError" th:if="${#fields.hasErrors('body')}" th:errors="*{body}">Invalid body</span>
+                </div>
+
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="Post!"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layout :: site-footer" />
+
+</body>
+
+</html>

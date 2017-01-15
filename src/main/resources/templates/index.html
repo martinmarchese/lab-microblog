@@ -2,32 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
     <head th:replace="layout :: site-head">
-        <title>Spring MVC Blog</title>
+        <title>MMs MicroBlog</title>
     </head>
 
     <body>
 
         <header th:replace="layout :: site-header" />
-        <aside>
+
+        <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="jumbotron">
+                            <h1>Welcome!</h1>
+                            <h2>This is our newest post...</h2>
+                            <p><a href="#" th:each="p : ${lastPost}" th:href="@{/posts/view/{id}/(id=${p.id})}" th:text="${p.title}"/></p>
+                            <a href="posts">See more..</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Last 5 Posts</h4>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item" th:each="p : ${latest5posts}" th:href="@{/posts/view/{id}/(id=${p.id})}" th:text="${p.title}"/>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!--<aside>
             <h2>Recent Posts</h2>
             <a href="#" th:each="p : ${latest5posts}" th:text="${p.title}" th:href="@{/posts/view/{id}/(id=${p.id})}">Work Begins on HTML5.1</a>
         </aside>
-
-        <main id="posts">
-            <article th:each="p : ${latest3posts}">
-                <h2 class="title" th:text="${p.title}">Post Title</h2>
-                <div class="date">
-                    <i>Posted on</i>
-                    <span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-May-2016</span>
-                    <span th:if="${p.author}" th:remove="tag">
-                  <i>by</i>
-                  <span th:text="${p.author.fullName != null ?
-                                p.author.fullName : p.author.username}">Svetlin Nakov</span>
-                </span>
-                </div>
-                <p class="content" th:utext="${p.body}">Post content</p>
-            </article>
-        </main>
+-->
 
         <footer th:replace="layout :: site-footer" />
     </body>
